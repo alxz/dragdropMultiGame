@@ -15,7 +15,9 @@ body {
   /* Main content area */
   
   #content {
-    margin: 80px 70px;
+    margin: 50px 40px;
+    padding: 20px;;
+    background: #abddec;
     text-align: center;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -27,7 +29,7 @@ body {
   .wideBox {
     clear: both;
     text-align: center;
-    margin: 70px;
+    margin: 50px;
     padding: 10px;
     background: #ebedf2;
     border: 1px solid #333;
@@ -51,12 +53,25 @@ body {
   
   #cardPile {
     margin: 0 auto;
-    background: #ffd;
+    /* background: #ffd; */
   }
-  
-  #cardSlots, #cardPile {
-    width: 910px;
-    height: 250px;
+
+  #cardPile {
+    width: 900px;
+    height: 220px;
+    padding: 20px;
+    /* border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
+    box-shadow: 0 0 .3em rgba(0, 0, 0, .8); */
+  }
+
+  #cardSlots {
+    width: 900px;
+    height: 290px;
     padding: 20px;
     border: 2px solid #333;
     -moz-border-radius: 10px;
@@ -66,29 +81,35 @@ body {
     -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
     box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
   }
+
   
   /* Individual cards and slots */
   
   #cardSlots div, #cardPile div {
     float: left;
-    width: 180px;
+    width: 150px;
     height: 200px;
-    padding: 10px;
+    padding: 5px;
     padding-top: 5px;
     padding-bottom: 0;
-    border: 2px solid #333;
+    /* border: 2px solid #333; */
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     margin: 0 0 0 10px;
-    background: #fff;
+    /* background: #fff; */
+  }
+  
+  #cardPile div{
+    margin: auto;
+    /* background: #ffd; */
   }
 
   #emptySlots div, #emptyPile div {
     float: left;
-    width: 180px;
+    width: 150px;
     height: 200px;
-    padding: 10px;
+    padding: 5px;
     padding-top: 5px;
     padding-bottom: 0;
     /* border: 2px solid #333; */
@@ -107,12 +128,12 @@ body {
     background: #aaa;
   }
   
-  #cardSlots div {
+  /* #cardSlots div {
     border-style: dashed;
-  }
+  } */
   
   #cardPile div {
-    background: rgb(223, 222, 212);
+    /* background: rgb(223, 212, 215); */
     color: #fff;
     font-size: 50px;
     text-shadow: 0 0 3px #000;
@@ -125,8 +146,7 @@ body {
   }
   
   /* Individually coloured cards */
-  #card1.correct { background: orange; }
-  #card2.correct { background: yellow; }
+  #card1.correct { background: rgb(196, 233, 137); }
 
   /* #card1.correct { background: red; }
   #card2.correct { background: brown; }

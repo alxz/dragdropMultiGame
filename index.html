@@ -1,38 +1,181 @@
-<style>
-    #makeMeDraggable { float: left; width: 300px; height: 300px; background: red; }
-    #makeMeDroppable { float: right; width: 300px; height: 300px; border: 1px solid #999; }
-    </style>
-    
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>A jQuery Drag-and-Drop Quiz Game</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-    
-    <script type="text/javascript">
-    
-    $( init );
-    
-    function init() {
-      $('#makeMeDraggable').draggable();
-      $('#makeMeDroppable').droppable( {
-        drop: handleDropEvent
-      } );
+<script type="text/javascript">
+
+var correctCards = 0;
+$( init );
+var arrObjects = [
+    {
+        'imgSrc' : '<img src="../img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
+        'imgDest1' :  '<img src="../img/paper-shredder.png" alt="paper-shredder" width="200" height="200">',        
+        'imgDest2' :  '<img src="../img/rubbish-waste-paper.png" alt="rubbish-waste" width="200" height="200">',
+        'txtDest1' :  '<h3>Shredder for Paper</h3>',
+        'txtDest2' :  '<h3>Office Waste Bin</h3>',
+        'correctDest' : 1
+    },
+    {
+        'imgSrc' : '<img src="../img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
+        'imgDest1' :  '<img src="../img/computer-desk-table.png" alt="computer-desk" width="200" height="200">',
+        'imgDest2' :  '<img src="../img/drawerLocker.png" alt="drawerLocker" width="200" height="200">',
+        'txtDest1' :  '<h3>Office Desk</h3>',
+        'txtDest2' :  '<h3>Drawer With Lock</h3>',
+        'correctDest' : 2
+    },
+    {
+        'imgSrc' : '<img src="../img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
+        'imgDest1' :  '<img src="../img/desktopPrinter.png" alt="desktopPrinter" width="200" height="200">',
+        'imgDest2' :  '<img src="../img/kyoceraFollowMe.png" alt="kyoceraFollowMe" width="200" height="200">',
+        'txtDest1' :  '<h3>Office Printer</h3>',
+        'txtDest2' :  '<h3>Kyocera FloowMe Printer</h3>',
+        'correctDest' : 2
     }
-    
-    function handleDropEvent( event, ui ) {
-      var draggable = ui.draggable;
-      alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto me!' );
+     
+  ];
+
+var objectId = 0;
+
+function init() {
+    //set initial images:
+    var docImg = arrObjects[objectId].imgSrc;    
+    var imgDest1 = arrObjects[objectId].imgDest1;  
+    var imgDest2 = arrObjects[objectId].imgDest2;
+    var correctDestId = arrObjects[objectId].correctDest;
+    var txtDest1 = arrObjects[objectId].txtDest1;
+    var txtDest2 = arrObjects[objectId].txtDest2;
+  // Hide the success message
+  $('#successMessage').hide();
+  $('#successMessage').css( {
+    left: '580px',
+    top: '250px',
+    width: 0,
+    height: 0
+  } );
+
+  // Reset the game
+  correctCards = 0;
+  $('#cardPile').html( '' );
+  $('#cardSlots').html( '' );
+
+  // Create the pile of shuffled cards
+  var numbers = [ 1, 2 ];
+//   numbers.sort( function() { return Math.random() - .5 } );
+$('<div>' + '' + '</div>').data( 'number', 10 ).attr( 'id', 'emptyCard'+0 ).appendTo( '#cardPile' );
+$('<div>' + '' + '</div>').data( 'number', 11 ).attr( 'id', 'emptyCard'+1 ).appendTo( '#cardPile' );
+$('<div>' + docImg + '</div>').data( 'number', correctDestId ).attr( 'id', 'card'+1 ).appendTo( '#cardPile' ).draggable( {
+      containment: '#content',
+      stack: '#cardPile div',
+      cursor: 'move',
+      revert: true
+    } );
+$('<div>' + '' + '</div>').data( 'number', 12 ).attr( 'id', 'emptyCard'+2 ).appendTo( '#cardPile' );
+$('<div>' + '' + '</div>').data( 'number', 13 ).attr( 'id', 'emptyCard'+3 ).appendTo( '#cardPile' );    
+
+//   for ( var i=0; i<2; i++ ) {
+//     $('<div>' + docImg + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
+//       containment: '#content',
+//       stack: '#cardPile div',
+//       cursor: 'move',
+//       revert: true
+//     } );
+
+//   }
+
+
+  // Create the card slots
+//   var words = [ 'one', 'two' ];
+  $('<div>' + imgDest1 + txtDest1 + '</div>').data( 'number', 1 ).appendTo( '#cardSlots' ).droppable( {
+      accept: '#cardPile div',
+      hoverClass: 'hovered',
+      drop: handleCardDrop
+    } );
+  for ( var i=1; i<=3; i++ ) {
+    $('<div>' + ' ' + '</div>').data( 'number', 100 + i ).appendTo( '#cardSlots' ).droppable( {
+      accept: '#cardPile div',
+      hoverClass: 'hovered',
+      drop: handleCardDrop
+    } );
+  }
+    $('<div>' + imgDest2 + txtDest2 + '</div>').data( 'number', 2 ).appendTo( '#cardSlots' ).droppable( {
+      accept: '#cardPile div',
+      hoverClass: 'hovered',
+      drop: handleCardDrop
+    } );
+
+    if (objectId == 2) {
+        objectId = 0;
+    } else {
+        objectId++
     }
-    
-    </script>
-    
-    </head>
-    <body>
-    
-    <div id="content" style="height: 400px;">
-    
-      <div id="makeMeDraggable"> </div>
-      <div id="makeMeDroppable"> </div>
-    
-    </div>
-    
-    </body>
-    </html>
+
+}
+
+function handleCardDrop( event, ui ) {
+  var slotNumber = $(this).data( 'number' );
+  var cardNumber = ui.draggable.data( 'number' );
+
+  // If the card was dropped to the correct slot,
+  // change the card colour, position it directly
+  // on top of the slot, and prevent it being dragged
+  // again
+  
+    if ( slotNumber == cardNumber ) { 
+    ui.draggable.addClass( 'correct' );
+    ui.draggable.draggable( 'disable' );
+    $(this).droppable( 'disable' );
+    ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+    ui.draggable.draggable( 'option', 'revert', false );
+    correctCards++;
+  } 
+  
+  // If all the cards have been placed correctly then display a message
+  // and reset the cards for another go
+
+  if ( correctCards == 1 ) {
+    $('#successMessage').show();
+    $('#successMessage').animate( {
+      left: '380px',
+      top: '200px',
+      width: '400px',
+      height: '100px',
+      opacity: 1
+    } );
+  }
+}
+
+</script>
+
+</head>
+<body>
+
+<div class="wideBox">
+  <h1>Drag-and-Drop game: Sensitive Information</h1>
+  <h2>Drag and drop the document to the appropriate location!</h2>
+</div>
+
+<div id="content">
+  <div id="emptyCard1"> </div>
+  <div id="cardPile"> </div>
+  <div id="cardSlots"> </div>
+
+  <div id="successMessage">
+    <h2>Great, you've got it!</h2>
+    <button onclick="init()">Play Again</button>
+  </div>
+
+</div>
+
+<div class="wideBox">
+    <p>Try your luck</p>
+  </div>
+
+</body>
+</html>
+

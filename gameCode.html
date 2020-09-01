@@ -90,7 +90,53 @@
             }
 
             }
+            // *********** Step 3: The handleCardDrop() event handler function ********** //
+            function handleCardDrop( event, ui ) {
+                // 1. Grab the slot number and card number
+                    /*
+                        // The first thing we do is grab the number of the slot that the card was dropped on, 
+                        // as well as the number of the dropped card, so that we can see if they match.
 
+                        // As our function is an event handler for the droppable element, 
+                        // we can retrieve the element via the this variable. 
+                        // We then wrap the element inside the $() function to turn it into a jQuery object, 
+                        // then use the data() method to retrieve the value of the 'number' key, and store the value in slotNumber.
+
+                        // Similarly, the draggable property of the ui object contains the jQuery object representing the dragged card. 
+                        // By reading its 'number' key using data(), we get the card number, which we store in cardNumber.
+                    */
+                var slotNumber = $(this).data( 'number' );
+                var cardNumber = ui.draggable.data( 'number' );
+
+                // If the card was dropped to the correct slot,
+                // change the card colour, position it directly
+                // on top of the slot, and prevent it being dragged
+                // again
+
+                if ( slotNumber == cardNumber ) {
+                    ui.draggable.addClass( 'correct' );
+                    ui.draggable.draggable( 'disable' );
+                    $(this).droppable( 'disable' );
+                    ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+                    ui.draggable.draggable( 'option', 'revert', false );
+                    correctCards++;
+                } 
+                
+                // If all the cards have been placed correctly then display a message
+                // and reset the cards for another go
+
+                if ( correctCards == 10 ) {
+                    $('#successMessage').show();
+                    $('#successMessage').animate( {
+                    left: '380px',
+                    top: '200px',
+                    width: '400px',
+                    height: '100px',
+                    opacity: 1
+                    } );
+                }
+
+                }
     </script>
 
 </head>
@@ -102,7 +148,7 @@
   <div id="cardSlots"> </div>
 
   <div id="successMessage">
-    <h2>Ye.e.e.s! You did it!</h2>
+    <h2>Great work! You did it!</h2>
     <button onclick="init()">Play Again</button>
   </div>
 

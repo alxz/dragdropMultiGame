@@ -178,3 +178,112 @@ body {
     box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
     padding: 20px;
   }  
+
+  .initMessage {
+    position: absolute;
+    left: 20%;
+    top: 200px;
+    width: 800px;
+    height: 600px;
+    z-index: 100;
+    background: #dfd;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+    -webkit-box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+    box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+    padding: 20px;
+  }  
+
+  #topRowMsg {
+    float: none;
+    width: 95%;
+    height: 60px;
+    padding: 15px;
+    padding-top: 0;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    background: #fff;
+  }
+
+  .initContMainDiv {
+    float: none;
+    width: 95%;
+    height: 450px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    margin-top: 15px;
+  }
+  #leftTopColMsg {
+    float: left;
+    width: 45%;
+    height: 200px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin: auto;
+    background: rgb(238, 232, 196);
+  }
+  #leftBotColMsg {
+    float: left;
+    width: 45%;
+    height: 200px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* margin-top: 10px; */
+    margin: auto;
+    margin-top: 15px;
+    background: rgb(171, 203, 245);
+  }
+  #rightTopColMsg {
+    float: right;
+    width: 45%;
+    height: 200px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* margin-top: 10px; */
+    margin: auto;
+    background: rgb(236, 155, 155);
+  }
+  #rightBotColMsg {
+    float: right;
+    width: 45%;
+    height: 200px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #333;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /* margin-top: 10px; */
+    margin: auto;
+    margin-top: 15px;
+    background: rgb(177, 236, 231);
+  }

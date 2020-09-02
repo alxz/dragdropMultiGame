@@ -11,6 +11,7 @@
 <script type="text/javascript">
 
 var correctCards = 0;
+var objectId = 0;
 $( init );
 var arrObjects = [
     {
@@ -40,8 +41,6 @@ var arrObjects = [
      
   ];
 
-var objectId = 0;
-
 function init() {
     //set initial images:
     var docImg = arrObjects[objectId].imgSrc;    
@@ -50,6 +49,9 @@ function init() {
     var correctDestId = arrObjects[objectId].correctDest;
     var txtDest1 = arrObjects[objectId].txtDest1;
     var txtDest2 = arrObjects[objectId].txtDest2;
+
+// show game selector:
+$('#selectGame').show();    
   // Hide the success message
   $('#successMessage').hide();
   $('#successMessage').css( {
@@ -109,11 +111,11 @@ $('<div>' + '' + '</div>').data( 'number', 13 ).attr( 'id', 'emptyCard'+3 ).appe
       drop: handleCardDrop
     } );
 
-    if (objectId == 2) {
-        objectId = 0;
-    } else {
-        objectId++
-    }
+    // if (objectId == 2) {
+    //     objectId = 0;
+    // } else {
+    //     objectId++
+    // }
 
 }
 
@@ -149,12 +151,62 @@ function handleCardDrop( event, ui ) {
     } );
   }
 }
+</script>
 
+<script>
+// $(document).ready(function(){
+//     $('#selectGame').click(function() {
+//       $('.initMessage').toggle("slide");
+//     });
+// });
+
+function leftTopColMsg() { 
+  
+  
+  //   $("#rightTopColMsg").click(function(){
+  //     $("#selectGame").hide();
+  // });
+  objectId=0;
+  init();
+  $("#selectGame").hide();
+  
+}
+function clickTopRight() { 
+  // $( init );
+  
+  objectId=0;
+  init();
+  $("#selectGame").hide();
+}
+function leftBotColMsg() { 
+  // $( init );
+  
+  objectId=1;
+  init();
+  $("#selectGame").hide();
+}
+function rightBotColMsg() { 
+  // $( init );
+  
+  objectId=2;
+  init();
+  $("#selectGame").hide();
+}
 </script>
 
 </head>
 <body>
-
+<div class="initMessage" id="selectGame" >
+  <div id="topRowMsg"><h1>Sensitive Information: select a game</h1></div>
+  <div class="initContMainDiv">
+    
+    <div id="leftTopColMsg" onclick="leftTopColMsg()"><h3>Documents pile here</h3></div>
+    <div id="rightTopColMsg" onclick="clickTopRight()"><h3>Drawer and an Office Desk</h3></div>
+    
+    <div id="leftBotColMsg" onclick="leftBotColMsg()"><h3>Two printers</h3></div>    
+    <div id="rightBotColMsg" onclick="rightBotColMsg()"><h3>Trash can and a paper-Shredder</h3></div>
+  </div>
+</div>
 <div class="wideBox">
   <h1>Drag-and-Drop game: Sensitive Information</h1>
   <h2>Drag and drop the document to the appropriate location!</h2>

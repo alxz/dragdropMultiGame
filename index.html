@@ -15,29 +15,33 @@ var objectId = 0;
 $( init );
 var arrObjects = [
     {
-        'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
-        'imgDest1' :  '<img src="img/paper-shredder.png" alt="paper-shredder" width="200" height="200">',        
-        'imgDest2' :  '<img src="img/rubbish-waste-paper.png" alt="rubbish-waste" width="200" height="200">',
-        'txtDest1' :  '<h3>Shredder for Paper</h3>',
-        'txtDest2' :  '<h3>Office Waste Bin</h3>',
-        'correctDest' : 1
-    },
-    {
-        'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
-        'imgDest1' :  '<img src="img/computer-desk-table.png" alt="computer-desk" width="200" height="200">',
-        'imgDest2' :  '<img src="img/drawerLocker.png" alt="drawerLocker" width="200" height="200">',
+      'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="160">',
+        'imgDest1' :  '<img src="img/computer-desk-table.png" alt="computer-desk" width="180" height="180">',
+        'imgDest2' :  '<img src="img/drawerLocker.png" alt="drawerLocker" width="180" height="180">',
         'txtDest1' :  '<h3>Office Desk</h3>',
         'txtDest2' :  '<h3>Drawer With Lock</h3>',
+        'backgColor' : '#ec9b9b',
         'correctDest' : 2
     },
     {
-        'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="200">',
-        'imgDest1' :  '<img src="img/desktopPrinter.png" alt="desktopPrinter" width="200" height="200">',
-        'imgDest2' :  '<img src="img/kyoceraFollowMe.png" alt="kyoceraFollowMe" width="200" height="200">',
+        'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="160">',
+        'imgDest1' :  '<img src="img/desktopPrinter.png" alt="desktopPrinter" width="180" height="180">',
+        'imgDest2' :  '<img src="img/kyoceraFollowMe.png" alt="kyoceraFollowMe" width="180" height="180">',
         'txtDest1' :  '<h3>Office Printer</h3>',
         'txtDest2' :  '<h3>Kyocera FloowMe Printer</h3>',
+        'backgColor' : '#abcbf5',
         'correctDest' : 2
+    },    
+    {
+      'imgSrc' : '<img src="img/confidentialPapers.png" alt="confidentialPapers" width="180" height="160">',
+        'imgDest1' :  '<img src="img/paper-shredder.png" alt="paper-shredder" width="180" height="180">',        
+        'imgDest2' :  '<img src="img/rubbish-waste-paper.png" alt="rubbish-waste" width="180" height="180">',
+        'txtDest1' :  '<h3>Shredder for Paper</h3>',
+        'txtDest2' :  '<h3>Office Waste Bin</h3>',
+        'backgColor' : '#abddec',
+        'correctDest' : 1        
     }
+
      
   ];
 
@@ -49,22 +53,23 @@ function init() {
     var correctDestId = arrObjects[objectId].correctDest;
     var txtDest1 = arrObjects[objectId].txtDest1;
     var txtDest2 = arrObjects[objectId].txtDest2;
-
+  //show background div:
+  $('#backgroundDiv').show();      
+    
 // show game selector:
-$('#selectGame').show();    
-  // Hide the success message
-  $('#successMessage').hide(); //failMessage
-  $('#failMessage').hide();
-
+$('#selectGame').show();     
+  $('#successMessage').hide();  // Hide the success message  
+  $('#failedMessage').hide(); // Hide the failure message
+  //setting correct css props for success messages
   $('#successMessage').css( {
-    left: '580px',
+    left: '85%',
     top: '250px',
     width: 0,
     height: 0
   } );
-  
-  $('#failMessage').css( {
-    left: '580px',
+  //setting correct css props for failure messages  
+  $('#failedMessage').css( {
+    left: '85%',
     top: '250px',
     width: 0,
     height: 0
@@ -77,55 +82,38 @@ $('#selectGame').show();
   $('#cardSlots').html( '' );
 
   // Create the pile of shuffled cards
-  var numbers = [ 1, 2 ];
-//   numbers.sort( function() { return Math.random() - .5 } );
-$('<div>' + '' + '</div>').data( 'number', 10 ).attr( 'id', 'emptyCard'+0 ).appendTo( '#cardPile' );
-$('<div>' + '' + '</div>').data( 'number', 11 ).attr( 'id', 'emptyCard'+1 ).appendTo( '#cardPile' );
+$('<div>' + '' + '</div>').data( 'number', 10 ).attr( 'id', 'emptyCard'+0 ).appendTo( '#cardPile' ); // empty slot
+$('<div>' + '' + '</div>').data( 'number', 11 ).attr( 'id', 'emptyCard'+1 ).appendTo( '#cardPile' ); // empty slot
 $('<div>' + docImg + '</div>').data( 'number', correctDestId ).attr( 'id', 'card'+1 ).appendTo( '#cardPile' ).draggable( {
       containment: '#content',
       stack: '#cardPile div',
       cursor: 'move',
       revert: true
     } );
-$('<div>' + '' + '</div>').data( 'number', 12 ).attr( 'id', 'emptyCard'+2 ).appendTo( '#cardPile' );
-$('<div>' + '' + '</div>').data( 'number', 13 ).attr( 'id', 'emptyCard'+3 ).appendTo( '#cardPile' );    
-
-//   for ( var i=0; i<2; i++ ) {
-//     $('<div>' + docImg + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
-//       containment: '#content',
-//       stack: '#cardPile div',
-//       cursor: 'move',
-//       revert: true
-//     } );
-
-//   }
-
+$('<div>' + '' + '</div>').data( 'number', 12 ).attr( 'id', 'emptyCard'+2 ).appendTo( '#cardPile' ); // empty slot
+$('<div>' + '' + '</div>').data( 'number', 13 ).attr( 'id', 'emptyCard'+3 ).appendTo( '#cardPile' ); // empty slot  
 
   // Create the card slots
-//   var words = [ 'one', 'two' ];
+  $('<div>' + ' ' + '</div>').data( 'number', 100 ).appendTo( '#cardSlots' );  
   $('<div>' + imgDest1 + txtDest1 + '</div>').data( 'number', 1 ).appendTo( '#cardSlots' ).droppable( {
       accept: '#cardPile div',
       hoverClass: 'hovered',
       drop: handleCardDrop
     } );
-  for ( var i=1; i<=3; i++ ) {
-    $('<div>' + ' ' + '</div>').data( 'number', 100 + i ).appendTo( '#cardSlots' ).droppable( {
-      accept: '#cardPile div',
-      hoverClass: 'hovered'
-    } );
-  }
-    $('<div>' + imgDest2 + txtDest2 + '</div>').data( 'number', 2 ).appendTo( '#cardSlots' ).droppable( {
+  // for ( var i=1; i<=2; i++ ) {
+  //   $('<div>' + ' ' + '</div>').data( 'number', 100 + i ).appendTo( '#cardSlots' ).droppable( {
+  //     accept: '#cardPile div',
+  //     hoverClass: 'hovered'
+  //   } );
+  // }
+  $('<div>' + ' ' + '</div>').data( 'number', 102 ).appendTo( '#cardSlots' );
+  $('<div>' + imgDest2 + txtDest2 + '</div>').data( 'number', 2 ).appendTo( '#cardSlots' ).droppable( {
       accept: '#cardPile div',
       hoverClass: 'hovered',
       drop: handleCardDrop
     } );
 
-    // if (objectId == 2) {
-    //     objectId = 0;
-    // } else {
-    //     objectId++
-    // }
-
+    $('<div>' + ' ' + '</div>').data( 'number', 103 ).appendTo( '#cardSlots' );    
 }
 
 function handleCardDrop( event, ui ) {
@@ -135,8 +123,7 @@ function handleCardDrop( event, ui ) {
   // If the card was dropped to the correct slot,
   // change the card colour, position it directly
   // on top of the slot, and prevent it being dragged
-  // again
-  
+  // again  
   if ( slotNumber == cardNumber ) { 
     ui.draggable.addClass( 'correct' );
     ui.draggable.draggable( 'disable' );
@@ -144,41 +131,62 @@ function handleCardDrop( event, ui ) {
     ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
     ui.draggable.draggable( 'option', 'revert', false );
     correctCards++;
-  } else {
-    // ui.draggable.addClass( 'correct' );
-    // ui.draggable.draggable( 'disable' );
-    // $(this).droppable( 'disable' );
-    // ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
-    // ui.draggable.draggable( 'option', 'revert', false );
-    failedTurn++;
-  }
-
-  
-  // If all the cards have been placed correctly then display a message
-  // and reset the cards for another go
-
-  if ( correctCards == 1 ) {
-    $('#successMessage').show();
-    $('#successMessage').animate( {
-      left: '380px',
-      top: '200px',
-      width: '400px',
-      height: '100px',
-      opacity: 1
-    } );
-  }
-  if ( failedTurn > 0 ) {
-      $('#failedMessage').show();
+  }  else {
+    // if this is incorrect card dropped:
+    ui.draggable.addClass( 'incorrect' );
+    //ui.draggable.draggable( 'disable' );
+    //$(this).droppable( 'disable' );
+    //ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+    //ui.draggable.draggable( 'option', 'revert', false );
+    $('#failedMessage').show();
       $('#failedMessage').animate( {
-        left: '380px',
+        left: '35%',
         top: '200px',
         width: '400px',
         height: '100px',
         opacity: 1
       } );
-    }
-
+  }
+  // If all the cards have been placed correctly then display a message
+  // and reset the cards for another go
+  if ( correctCards == 1 ) {
+    $('#successMessage').show();
+    $('#successMessage').animate( {
+      left: '35%',
+      top: '200px',
+      width: '400px',
+      height: '100px',
+      opacity: 1
+    } );
+    // parameters: 
+    //   left: '380px',
+    //   top: '200px',
+    //   width: '400px',
+    //   height: '100px',
+    //   opacity: 1
+  }
 }
+
+function clearWrongDrop() {
+  $('#successMessage').hide();  // Hide the success message  
+  $('#failedMessage').hide(); // Hide the failure message
+  //setting correct css props for success messages
+  $('#successMessage').css( {
+    left: '85%',
+    top: '250px',
+    width: 0,
+    height: 0
+  } );
+  //setting correct css props for failure messages  
+  $('#failedMessage').css( {
+    left: '85%',
+    top: '250px',
+    width: 0,
+    height: 0
+  } );
+  $('#card1').removeClass( 'incorrect' );
+}
+
 </script>
 
 <script>
@@ -188,91 +196,89 @@ function handleCardDrop( event, ui ) {
 //     });
 // });
 
-function leftTopColMsg() { 
-  
-  
+function leftTopColMsg() {   
   //   $("#rightTopColMsg").click(function(){
   //     $("#selectGame").hide();
   // });
   objectId=0;
   init();
-  $("#selectGame").hide();
-  
+  $("#selectGame").hide();  
+  $('#backgroundDiv').hide();
 }
 function clickTopRight() { 
-  // $( init );
-  
+  // $( init );  
   objectId=0;
   init();
   $("#selectGame").hide();
+  $('#backgroundDiv').hide();
 }
 function leftBotColMsg() { 
-  // $( init );
-  
+  // $( init );  
   objectId=1;
   init();
   $("#selectGame").hide();
+  $('#backgroundDiv').hide();
 }
 function rightBotColMsg() { 
-  // $( init );
-  
+  // $( init );  
   objectId=2;
   init();
   $("#selectGame").hide();
+  $('#backgroundDiv').hide();
 }
 </script>
 
 </head>
 <body>
-<div class="initMessage" id="selectGame" >
-  <div id="topRowMsg"><h1>Sensitive Information: select a game</h1></div>
-  <div class="initContMainDiv">
-    
-    <div id="leftTopColMsg" onclick="leftTopColMsg()" onmouseover="this.style.cursor='pointer';">
-      <!-- <h3>Documents pile here</h3> -->
-      <img src="img/document-background.png" alt="paper-shredder" width="330" height="200">
-    </div>
-    <div id="rightTopColMsg" onclick="clickTopRight()" onmouseover="this.style.cursor='pointer';">
-      <!-- <h3>Drawer and an Office Desk</h3> -->
-      <img src="img/trashCanShredder.png" alt="paper-shredder" width="330" height="200">
-    </div>
-          
-    <div id="leftBotColMsg" onclick="leftBotColMsg()" onmouseover="this.style.cursor='pointer';">
-      <!-- <h3>Two printers</h3> -->
-      <img src="img/printPaperShred.png" alt="paper-shredder" width="330" height="200">
-    </div>    
-    <div id="rightBotColMsg" onclick="rightBotColMsg()" onmouseover="this.style.cursor='pointer';">
-      <!-- <h3>Trash can and a paper-Shredder</h3> -->
-      <img src="img/deskAndDrawer.png" alt="paper-shredder" width="330" height="200">
+  <div id="backgroundDiv"> </div>
+
+  <div class="initMessage" id="selectGame" >
+    <div id="topRowMsg"><h1>Sensitive Information: select the game</h1></div>
+    <div class="initContMainDiv">
+      <!-- //<div id="leftTopColMsg" onclick="leftTopColMsg()" onmouseover="this.style.cursor='pointer';"></div> -->
+      <div id="leftTopColMsg" >
+        <!-- <h3>Documents pile here</h3> -->
+        <img src="img/document-background.png" alt="a-pile-of-docs" width="330" height="200">
+      </div>
+      <div id="rightTopColMsg" onclick="clickTopRight()" onmouseover="this.style.cursor='pointer';">
+        <!-- <h3>Drawer and an Office Desk</h3> -->
+        <img src="img/deskAndDrawer.png" alt="desk-And-Drawer" width="330" height="200">
+      </div>
+            
+      <div id="leftBotColMsg" onclick="leftBotColMsg()" onmouseover="this.style.cursor='pointer';">
+        <!-- <h3>Two printers</h3> -->
+        <img src="img/printPaperShred.png" alt="printers" width="330" height="200">
+      </div>    
+      <div id="rightBotColMsg" onclick="rightBotColMsg()" onmouseover="this.style.cursor='pointer';">
+        <!-- <h3>Trash can and a paper-Shredder</h3> -->
+        <img src="img/trashCanShredder.png" alt="paper-shredder" width="330" height="200">
+      </div>
     </div>
   </div>
-</div>
+  <div class="wideBox">
+    <h1>Information Security Games: Sensitive Information</h1>
+    <h2>Drag and place the document(s) to the correct destination!</h2>
+  </div>
+
+  <div id="content">
+    <div id="emptyCard1"> </div>
+    <div id="cardPile"> </div>
+    <div id="cardSlots"> </div>
+
+    <div id="successMessage">
+      <h2>Congratulations, this is correct!</h2>
+      <button onclick="init()">Play Again</button>
+    </div>
+
+    <div id="failedMessage">
+      <h2>Oh, no! Wrong answer!</h2>
+      <button onclick="clearWrongDrop()">Try more!</button>
+    </div>
+  </div>
+
 <div class="wideBox">
-  <h1>Drag-and-Drop game: Sensitive Information</h1>
-  <h2>Drag and drop the document to the appropriate location!</h2>
+    <!-- <p>Educational games, MUHC (C) 2020!</p> -->
 </div>
-
-<div id="content">
-  <div id="emptyCard1"> </div>
-  <div id="cardPile"> </div>
-  <div id="cardSlots"> </div>
-
-  <div id="successMessage">
-    <h2>Great, you've got it!</h2>
-    <button onclick="init()">Play Again</button>
-  </div>
-
-  <div id="failMessage">
-    <h2>Ops, this is wrong answer!</h2>
-    <button onclick="init()">Play Again</button>
-  </div>
-  
-
-</div>
-
-<div class="wideBox">
-    <p>Try your luck</p>
-  </div>
 
 </body>
 </html>

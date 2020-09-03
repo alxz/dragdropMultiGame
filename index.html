@@ -53,6 +53,7 @@ function init() {
     var correctDestId = arrObjects[objectId].correctDest;
     var txtDest1 = arrObjects[objectId].txtDest1;
     var txtDest2 = arrObjects[objectId].txtDest2;
+    var backColor = arrObjects[objectId].backgColor;
   //show background div:
   $('#backgroundDiv').show();      
     
@@ -80,7 +81,7 @@ $('#selectGame').show();
   failedTurn = 0;
   $('#cardPile').html( '' );
   $('#cardSlots').html( '' );
-
+  $("#content").css("background-color", backColor);
   // Create the pile of shuffled cards
 $('<div>' + '' + '</div>').data( 'number', 10 ).attr( 'id', 'emptyCard'+0 ).appendTo( '#cardPile' ); // empty slot
 $('<div>' + '' + '</div>').data( 'number', 11 ).attr( 'id', 'emptyCard'+1 ).appendTo( '#cardPile' ); // empty slot
@@ -224,7 +225,7 @@ function rightBotColMsg() {
   objectId=2;
   init();
   $("#selectGame").hide();
-  $('#backgroundDiv').hide();
+  $('#backgroundDiv').hide();  
 }
 </script>
 
@@ -267,12 +268,12 @@ function rightBotColMsg() {
 
     <div id="successMessage">
       <h2>Congratulations, this is correct!</h2>
-      <button onclick="init()">Play Again</button>
+      <button onclick="init()">Play again</button>
     </div>
 
     <div id="failedMessage">
-      <h2>Oh, no! Wrong answer!</h2>
-      <button onclick="clearWrongDrop()">Try more!</button>
+      <h2>Oh, no! Incorrect answer!</h2>
+      <button onclick="clearWrongDrop()">Try again!</button>
     </div>
   </div>
 

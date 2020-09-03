@@ -53,8 +53,17 @@ function init() {
 // show game selector:
 $('#selectGame').show();    
   // Hide the success message
-  $('#successMessage').hide();
+  $('#successMessage').hide(); //failMessage
+  $('#failMessage').hide();
+
   $('#successMessage').css( {
+    left: '580px',
+    top: '250px',
+    width: 0,
+    height: 0
+  } );
+  
+  $('#failMessage').css( {
     left: '580px',
     top: '250px',
     width: 0,
@@ -63,6 +72,7 @@ $('#selectGame').show();
 
   // Reset the game
   correctCards = 0;
+  failedTurn = 0;
   $('#cardPile').html( '' );
   $('#cardSlots').html( '' );
 
@@ -101,8 +111,7 @@ $('<div>' + '' + '</div>').data( 'number', 13 ).attr( 'id', 'emptyCard'+3 ).appe
   for ( var i=1; i<=3; i++ ) {
     $('<div>' + ' ' + '</div>').data( 'number', 100 + i ).appendTo( '#cardSlots' ).droppable( {
       accept: '#cardPile div',
-      hoverClass: 'hovered',
-      drop: handleCardDrop
+      hoverClass: 'hovered'
     } );
   }
     $('<div>' + imgDest2 + txtDest2 + '</div>').data( 'number', 2 ).appendTo( '#cardSlots' ).droppable( {
@@ -128,14 +137,22 @@ function handleCardDrop( event, ui ) {
   // on top of the slot, and prevent it being dragged
   // again
   
-    if ( slotNumber == cardNumber ) { 
+  if ( slotNumber == cardNumber ) { 
     ui.draggable.addClass( 'correct' );
     ui.draggable.draggable( 'disable' );
     $(this).droppable( 'disable' );
     ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
     ui.draggable.draggable( 'option', 'revert', false );
     correctCards++;
-  } 
+  } else {
+    // ui.draggable.addClass( 'correct' );
+    // ui.draggable.draggable( 'disable' );
+    // $(this).droppable( 'disable' );
+    // ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+    // ui.draggable.draggable( 'option', 'revert', false );
+    failedTurn++;
+  }
+
   
   // If all the cards have been placed correctly then display a message
   // and reset the cards for another go
@@ -150,6 +167,17 @@ function handleCardDrop( event, ui ) {
       opacity: 1
     } );
   }
+  if ( failedTurn > 0 ) {
+      $('#failedMessage').show();
+      $('#failedMessage').animate( {
+        left: '380px',
+        top: '200px',
+        width: '400px',
+        height: '100px',
+        opacity: 1
+      } );
+    }
+
 }
 </script>
 
@@ -200,11 +228,23 @@ function rightBotColMsg() {
   <div id="topRowMsg"><h1>Sensitive Information: select a game</h1></div>
   <div class="initContMainDiv">
     
-    <div id="leftTopColMsg" onclick="leftTopColMsg()"><h3>Documents pile here</h3></div>
-    <div id="rightTopColMsg" onclick="clickTopRight()"><h3>Drawer and an Office Desk</h3></div>
-    
-    <div id="leftBotColMsg" onclick="leftBotColMsg()"><h3>Two printers</h3></div>    
-    <div id="rightBotColMsg" onclick="rightBotColMsg()"><h3>Trash can and a paper-Shredder</h3></div>
+    <div id="leftTopColMsg" onclick="leftTopColMsg()" onmouseover="this.style.cursor='pointer';">
+      <!-- <h3>Documents pile here</h3> -->
+      <img src="img/document-background.png" alt="paper-shredder" width="330" height="200">
+    </div>
+    <div id="rightTopColMsg" onclick="clickTopRight()" onmouseover="this.style.cursor='pointer';">
+      <!-- <h3>Drawer and an Office Desk</h3> -->
+      <img src="img/trashCanShredder.png" alt="paper-shredder" width="330" height="200">
+    </div>
+          
+    <div id="leftBotColMsg" onclick="leftBotColMsg()" onmouseover="this.style.cursor='pointer';">
+      <!-- <h3>Two printers</h3> -->
+      <img src="img/printPaperShred.png" alt="paper-shredder" width="330" height="200">
+    </div>    
+    <div id="rightBotColMsg" onclick="rightBotColMsg()" onmouseover="this.style.cursor='pointer';">
+      <!-- <h3>Trash can and a paper-Shredder</h3> -->
+      <img src="img/deskAndDrawer.png" alt="paper-shredder" width="330" height="200">
+    </div>
   </div>
 </div>
 <div class="wideBox">
@@ -221,6 +261,12 @@ function rightBotColMsg() {
     <h2>Great, you've got it!</h2>
     <button onclick="init()">Play Again</button>
   </div>
+
+  <div id="failMessage">
+    <h2>Ops, this is wrong answer!</h2>
+    <button onclick="init()">Play Again</button>
+  </div>
+  
 
 </div>
 
